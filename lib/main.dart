@@ -34,6 +34,38 @@ class _ConvertorState extends State<Convertor> {
             children: <Widget>[
               Image.network(
                   'https://i0.wp.com/www.reteauadestiri.ro/wp-content/uploads/bani-in-geamantan.jpg?zoom=2&fit=960%2C720'),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: DropdownButton<String>(
+                      value: 'EUR',
+                      icon: const Icon(Icons.arrow_downward),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: const TextStyle(color: Colors.deepPurple),
+                      underline: Container(
+                        height: 2,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: DropdownButton<String>(
+                      value: 'RON',
+                      icon: const Icon(Icons.arrow_downward),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: const TextStyle(color: Colors.deepPurple),
+                      underline: Container(
+                        height: 2,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               TextField(
                 onChanged: (String value) {
                   setState(() {
