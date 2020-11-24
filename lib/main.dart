@@ -22,6 +22,8 @@ class _ConvertorState extends State<Convertor> {
   double rate = 4.5;
   double convertedAmount = 0.0;
 
+  String targetCurrency = 'EUR';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +35,7 @@ class _ConvertorState extends State<Convertor> {
           child: Column(
             children: <Widget>[
               Image.network(
-                  'https://i0.wp.com/www.reteauadestiri.ro/wp-content/uploads/bani-in-geamantan.jpg?zoom=2&fit=960%2C720'),
+                  'https://media3.s-nbcnews.com/j/newscms/2019_06/2746941/190208-stock-money-fanned-out-ew-317p_fa445b2f6f3e86a3ffa18707e6a8adcb.fit-2000w.jpg'),
               Row(
                 children: [
                   Expanded(
@@ -63,14 +65,16 @@ class _ConvertorState extends State<Convertor> {
                     child: Center(
                       child: DropdownButton<String>(
                         onChanged: (String newValue) {
-                          setState(() {});
+                          setState(() {
+                            targetCurrency = newValue;
+                          });
                         },
                         value: 'EUR',
                         icon: const Icon(Icons.arrow_downward),
                         iconSize: 24,
                         elevation: 16,
                         style: const TextStyle(color: Colors.deepPurple),
-                        items: <String>['RON', 'EUR', 'USD']
+                        items: <String>['EUR', 'USD']
                             .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
@@ -108,7 +112,7 @@ class _ConvertorState extends State<Convertor> {
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Text(
-                    '$convertedAmount EUR',
+                    '$convertedAmount $targetCurrency',
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
