@@ -18,6 +18,7 @@ class Convertor extends StatefulWidget {
 }
 
 class _ConvertorState extends State<Convertor> {
+  bool isValid = false;
   double rate = 4.5;
   double convertedAmount = 0.0;
 
@@ -30,31 +31,53 @@ class _ConvertorState extends State<Convertor> {
         ),
         body: Padding(
           child: Column(
-            // ignore: prefer_const_literals_to_create_immutables
             children: <Widget>[
+              Image.network(
+                  'https://i0.wp.com/www.reteauadestiri.ro/wp-content/uploads/bani-in-geamantan.jpg?zoom=2&fit=960%2C720'),
               TextField(
                 onChanged: (String value) {
-                  print(value.trim());
                   setState(() {
-                    convertedAmount = double.parse(value) * rate;
+                    print(value);
+                    if (isNumeric(value) || value == '0.0') {
+                      isValid = true;
+                      convertedAmount = double.parse(value) * rate;
+                      print(convertedAmount);
+                      return;
+                    }
+
+                    if (value == '') {
+                      convertedAmount = 0;
+                    }
+                    isValid = false;
                   });
                 },
-                decoration: const InputDecoration(hintText: 'Amount'),
+                decoration: InputDecoration(
+                    hintText: 'Amount',
+                    errorText: !isValid ? 'Enter a valid number' : null),
                 keyboardType: TextInputType.number,
               ),
-              Center(
-                  child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                        '$convertedAmount EUR',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      )))
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    '$convertedAmount EUR',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
           padding: const EdgeInsets.all(10.0),
         ));
   }
+}
+
+bool isNumeric(String s) {
+  if (s == null) {
+    return false;
+  }
+  return double.tryParse(s) != null;
 }
