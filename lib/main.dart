@@ -38,29 +38,45 @@ class _ConvertorState extends State<Convertor> {
                 children: [
                   Expanded(
                     flex: 1,
-                    child: DropdownButton<String>(
-                      value: 'EUR',
-                      icon: const Icon(Icons.arrow_downward),
-                      iconSize: 24,
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.deepPurple),
-                      underline: Container(
-                        height: 2,
-                        color: Colors.deepPurpleAccent,
+                    child: Center(
+                      child: DropdownButton<String>(
+                        onChanged: (String newValue) {
+                          setState(() {});
+                        },
+                        value: 'RON',
+                        icon: const Icon(Icons.arrow_downward),
+                        iconSize: 24,
+                        elevation: 16,
+                        style: const TextStyle(color: Colors.deepPurple),
+                        items: <String>['RON', 'EUR', 'USD']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
                       ),
                     ),
                   ),
                   Expanded(
                     flex: 1,
-                    child: DropdownButton<String>(
-                      value: 'RON',
-                      icon: const Icon(Icons.arrow_downward),
-                      iconSize: 24,
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.deepPurple),
-                      underline: Container(
-                        height: 2,
-                        color: Colors.deepPurpleAccent,
+                    child: Center(
+                      child: DropdownButton<String>(
+                        onChanged: (String newValue) {
+                          setState(() {});
+                        },
+                        value: 'EUR',
+                        icon: const Icon(Icons.arrow_downward),
+                        iconSize: 24,
+                        elevation: 16,
+                        style: const TextStyle(color: Colors.deepPurple),
+                        items: <String>['RON', 'EUR', 'USD']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
                       ),
                     ),
                   ),
