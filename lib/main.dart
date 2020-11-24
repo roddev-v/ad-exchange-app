@@ -22,6 +22,7 @@ class _ConvertorState extends State<Convertor> {
   double rate = 4.5;
   double convertedAmount = 0.0;
 
+  String sourceCurrency = 'RON';
   String targetCurrency = 'EUR';
 
   @override
@@ -43,14 +44,16 @@ class _ConvertorState extends State<Convertor> {
                     child: Center(
                       child: DropdownButton<String>(
                         onChanged: (String newValue) {
-                          setState(() {});
+                          setState(() {
+                            sourceCurrency = newValue;
+                          });
                         },
-                        value: 'RON',
+                        value: sourceCurrency,
                         icon: const Icon(Icons.arrow_downward),
                         iconSize: 24,
                         elevation: 16,
                         style: const TextStyle(color: Colors.deepPurple),
-                        items: <String>['RON', 'EUR', 'USD']
+                        items: <String>['RON', 'GBP']
                             .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
@@ -69,7 +72,7 @@ class _ConvertorState extends State<Convertor> {
                             targetCurrency = newValue;
                           });
                         },
-                        value: 'EUR',
+                        value: targetCurrency,
                         icon: const Icon(Icons.arrow_downward),
                         iconSize: 24,
                         elevation: 16,
@@ -104,7 +107,7 @@ class _ConvertorState extends State<Convertor> {
                   });
                 },
                 decoration: InputDecoration(
-                    hintText: 'Amount',
+                    prefix: Text(sourceCurrency),
                     errorText: !isValid ? 'Enter a valid number' : null),
                 keyboardType: TextInputType.number,
               ),
