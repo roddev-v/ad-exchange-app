@@ -25,6 +25,23 @@ class _ConvertorState extends State<Convertor> {
   String sourceCurrency = 'RON';
   String targetCurrency = 'EUR';
 
+  String imageUrl =
+      'https://media3.s-nbcnews.com/j/newscms/2019_06/2746941/190208-stock-money-fanned-out-ew-317p_fa445b2f6f3e86a3ffa18707e6a8adcb.fit-2000w.jpg';
+
+  void updateRate() {
+    final String code = '$sourceCurrency-$targetCurrency';
+    print(code);
+    if (code == 'RON-EUR') {
+      rate = 4.5;
+    } else if (code == 'RON-USD') {
+      rate = 4.4;
+    } else if (code == 'GBP-EUR') {
+      rate = 1.1;
+    } else {
+      rate = 1.2;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,8 +52,7 @@ class _ConvertorState extends State<Convertor> {
         body: Padding(
           child: Column(
             children: <Widget>[
-              Image.network(
-                  'https://media3.s-nbcnews.com/j/newscms/2019_06/2746941/190208-stock-money-fanned-out-ew-317p_fa445b2f6f3e86a3ffa18707e6a8adcb.fit-2000w.jpg'),
+              Image.network(imageUrl),
               Row(
                 children: [
                   Expanded(
@@ -46,6 +62,7 @@ class _ConvertorState extends State<Convertor> {
                         onChanged: (String newValue) {
                           setState(() {
                             sourceCurrency = newValue;
+                            updateRate();
                           });
                         },
                         value: sourceCurrency,
@@ -70,6 +87,7 @@ class _ConvertorState extends State<Convertor> {
                         onChanged: (String newValue) {
                           setState(() {
                             targetCurrency = newValue;
+                            updateRate();
                           });
                         },
                         value: targetCurrency,
